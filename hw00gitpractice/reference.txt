@@ -1,5 +1,5 @@
-clone
-pull
-push
-commit
-add
+clone - creates identical file/directory on computer that is being used
+pull - pulls the updated file/directory
+push - merges the changes made to the master branch
+commit - permenantly saves version (can go back to it)
+add - tracks the file/directory

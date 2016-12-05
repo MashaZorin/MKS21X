@@ -1,4 +1,4 @@
-public class SuperArray {
+public class SuperArray implements Iterable<String>{
     private String[] data;
     private int size;
 
@@ -139,6 +139,11 @@ public class SuperArray {
 	    }
 	}
 	return index;
+    }
+
+    public SuperArrayIterator iterator(){
+	SuperArrayIterator iter = new SuperArrayIterator(this);
+	return iter;
     }
 
     public static void main(String[]args){

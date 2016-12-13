@@ -25,11 +25,28 @@ public class Sorts{
 	}
     }
 
+    public static void printAry(int[] ary){
+	String array = "[";
+	for (int i = 0; i < ary.length - 1; i ++){
+	    array = array + ary[i] + ", ";
+	}
+	array = array + ary[ary.length - 1] + "]";
+	System.out.println(array);
+    }
+
     public static void main(String[]args){
-	int[] ary = {64,25,12,34,11};
-	System.out.println(ary);
-	selectionSort(ary);
-	System.out.println(ary);
+	int[] ary1 = {64,25,12,34,11};
+	int[] ary2 = {0,1,0};
+	
+	printAry(ary1);
+	selectionSort(ary1);
+	printAry(ary1);
+
+	System.out.println("\n");
+
+	printAry(ary2);
+	selectionSort(ary2);
+	printAry(ary2);
     }
 
 }

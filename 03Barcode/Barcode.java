@@ -8,11 +8,17 @@ public class Barcode implements Comparable<Barcode>{
     //postcondition: throws a runtime exception zip is not the correct length
     //               or zip contains a non digit
     //               _zip and _checkDigit are initialized.
+    //     if zip is not the correct length or zip contains a non digit
     public Barcode(String zip) {
-	if (_zip.length() != 5){
-	    throw new RuntimeException();
+	if (zip.length() != 5){
+	    throw new IllegalArgumentException("zip is not the correct length");
 	}
+	for( int i = 0; i < zip.length(); i++){
+	    if (zip.charAt(i) < '0' || zip.charAt(i) > '9')
+		throw new IllegalArgumentException("zip contains a non digit");
+	}	
 	_zip = zip;
+	_checkDigit = checkSum(_zip);
     }
 
     // postcondition: Creates a copy of a bar code.
@@ -21,10 +27,10 @@ public class Barcode implements Comparable<Barcode>{
     }
 
 
-    // postcondition: computes and returns the check sum for _zip
+    // postcondition: computes and returns the check sum for zip
     private static int checkSum(String zip){
 	int checkDigit = 0;
-	for (int i = 0; i < 5; i ++){
+	for (int i = 0; i < zip.length(); i ++){
 	    checkDigit += Integer.parseInt("" + zip.charAt(i));
 	}
 	checkDigit = checkDigit % 10;
@@ -32,7 +38,8 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     //postcondition: format zip + check digit + Barcode 
-    //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
+    //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"
+    
     public String toString(){
 	return _zip + checkSum(_zip) + " " + toCode(_zip);
     }
@@ -41,41 +48,41 @@ public class Barcode implements Comparable<Barcode>{
 	String zipString = "|";
 	String check = zip + checkSum(zip);
 	if (zip.length() != 5){
-	    throw new IllegalArgumentException();
+	    throw new IllegalArgumentException("zip is not the correct length");
 	}
 	for (int i = 0; i < check.length(); i ++){
-	    if (check.charAt(i) == 0){
+	    if (check.charAt(i) == '0'){
 		zipString += "||:::";
 	    }
-	    else if (check.charAt(i) == 1){
+	    else if (check.charAt(i) == '1'){
 		zipString += ":::||";
 	    }
-	    else if (check.charAt(i) == 2){
+	    else if (check.charAt(i) == '2'){
 		zipString += "::|:|";
 	    }
-	    else if (check.charAt(i) == 3){
+	    else if (check.charAt(i) == '3'){
 		zipString += "::||:";
 	    }
-	    else if (check.charAt(i) == 4){
+	    else if (check.charAt(i) == '4'){
 		zipString += ":|::|";
 	    }
-	    else if (check.charAt(i) == 5){
+	    else if (check.charAt(i) == '5'){
 		zipString += ":|:|:";
 	    }
-	    else if (check.charAt(i) == 6){
+	    else if (check.charAt(i) == '6'){
 		zipString += ":||::";
 	    }
-	    else if (check.charAt(i) == 7){
+	    else if (check.charAt(i) == '7'){
 		zipString += "|:::|";
 	    }
-	    else if (check.charAt(i) == 8){
+	    else if (check.charAt(i) == '8'){
 		zipString += "|::|:";
 	    }
-	    else if (check.charAt(i) == 9){
+	    else if (check.charAt(i) == '9'){
 		zipString += "|:|::";
 	    }
 	    else{
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException("zip is not the correct length");
 	    }
 	}
 	zipString += "|";
@@ -91,34 +98,36 @@ public class Barcode implements Comparable<Barcode>{
 	    throw new IllegalArgumentException("Improper end bars");
 	}
 	for (int i = 1; i < 31; i +=5){
-	    if (code.substring(i, i + 5) == "||:::"){
+	    String subcode = code.substring(i, i + 5);
+
+	    if ( subcode.equals("||:::")){
 		zip += "0";
 	    }
-	    else if (code.substring(i, i + 5) == ":::||"){
+	    else if (subcode.equals(":::||")){
 		zip += "1";
 	    }
-	    else if (code.substring(i, i + 5) == "::|:|"){
+	    else if (subcode.equals("::|:|")){
 		zip += "2";
 	    }
-	    else if (code.substring(i, i + 5) == "::||:"){
+	    else if (subcode.equals("::||:")){
 		zip += "3";
 	    }
-	    else if (code.substring(i, i + 5) == ":|::|"){
+	    else if (subcode.equals(":|::|")){
 		zip += "4";
 	    }
-	    else if (code.substring(i, i + 5) == ":|:|:"){
+	    else if (subcode.equals(":|:|:")){
 		zip += "5";
 	    }
-	    else if (code.substring(i, i + 5) == ":||::"){
+	    else if (subcode.equals(":||::")){
 		zip += "6";
 	    }
-	    else if (code.substring(i, i + 5) == "|:::|"){
+	    else if (subcode.equals("|:::|")){
 		zip += "7";
 	    }
-	    else if (code.substring(i, i + 5) == "|::|:"){
+	    else if (subcode.equals("|::|:")){
 		zip += "8";
 	    }
-	    else if (code.substring(i, i + 5) == "|:|::"){
+	    else if (subcode.equals("|:|::")){
 		zip += "9";
 	    }
 	    else{
@@ -136,7 +145,8 @@ public class Barcode implements Comparable<Barcode>{
 
     // postcondition: compares the zip + checkdigit, in numerical order. 
     public int compareTo(Barcode other){
-	return this.compareTo(other);
+	return (_zip+(char)_checkDigit).compareTo(other._zip+(char)_checkDigit);
     }
-    
+
 }
+

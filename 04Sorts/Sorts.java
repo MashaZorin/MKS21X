@@ -34,7 +34,7 @@ public class Sorts{
 		}
 		else{
 		    data[shift + 1] = value;
-		    pre = -1;
+		    shift = -1;
 		}
 	    }
 	}
@@ -52,6 +52,8 @@ public class Sorts{
     public static void main(String[]args){
 	int[] ary1 = {64,25,12,34,11};
 	int[] ary2 = {0,1,0};
+	int[] ary3 = {64,25,12,34,11};
+	int[] ary4 = {0,1,0};
 	
 	printAry(ary1);
 	selectionSort(ary1);
@@ -62,6 +64,18 @@ public class Sorts{
 	printAry(ary2);
 	selectionSort(ary2);
 	printAry(ary2);
+
+	System.out.println("\n");
+
+	printAry(ary3);
+	insertionSort(ary3);
+	printAry(ary3);
+
+	System.out.println("\n");
+
+	printAry(ary4);
+	insertionSort(ary4);
+	printAry(ary4);
     }
 
 }

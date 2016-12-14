@@ -25,6 +25,21 @@ public class Sorts{
 	}
     }
 
+    public static void insertionSort(int[] data){
+	for (int i = 1; i < data.length - 1; i ++){
+	    int value = data[i];
+	    for (int shift = i - 1; shift >= 0; shift --){
+		if (value < data[shift]){
+		    data[shift + 1] = data[shift];
+		}
+		else{
+		    data[shift + 1] = value;
+		    pre = -1;
+		}
+	    }
+	}
+    }
+
     public static void printAry(int[] ary){
 	String array = "[";
 	for (int i = 0; i < ary.length - 1; i ++){

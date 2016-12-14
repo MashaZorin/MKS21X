@@ -31,6 +31,9 @@ public class Sorts{
 	    for (int shift = i - 1; shift >= 0; shift --){
 		if (value < data[shift]){
 		    data[shift + 1] = data[shift];
+		    if (shift == 0){
+			data[shift] = 0;
+		    }
 		}
 		else{
 		    data[shift + 1] = value;

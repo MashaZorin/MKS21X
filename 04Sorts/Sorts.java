@@ -43,6 +43,24 @@ public class Sorts{
 	}
     }
 
+
+    public static void bubbleSort(int[] data){
+	int numSwaps = data.length;
+	int last = data.length;
+	while (numSwaps != 0){
+	    for (int i = 0; i < last; i ++){
+		numSwaps = 0;
+		if (data[i] > data[i + 1]){
+		    int placeholder = data[i];
+		    data[i] = data[i + 1];
+		    data[i + 1] = placeholder;
+		    numSwaps ++;
+		}
+		last --;
+	    }
+	}
+    }
+
     public static void printAry(int[] ary){
 	String array = "[";
 	for (int i = 0; i < ary.length - 1; i ++){

@@ -75,6 +75,8 @@ public class Sorts{
 	int[] ary2 = {0,1,0};
 	int[] ary3 = {64,25,12,34,11};
 	int[] ary4 = {0,1,0};
+	int[] ary5 = {64,25,12,34,11};
+	int[] ary6 = {0,1,0};
 	
 	printAry(ary1);
 	selectionSort(ary1);
@@ -97,6 +99,18 @@ public class Sorts{
 	printAry(ary4);
 	insertionSort(ary4);
 	printAry(ary4);
+
+	System.out.println("\n");
+
+	printAry(ary5);
+	bubbleSort(ary5);
+	printAry(ary5);
+
+	System.out.println("\n");
+
+	printAry(ary6);
+	bubbleSort(ary6);
+	printAry(ary6);
     }
 
 }

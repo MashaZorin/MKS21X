@@ -32,7 +32,7 @@ public class Sorts{
 		if (value < data[shift]){
 		    data[shift + 1] = data[shift];
 		    if (shift == 0){
-			data[shift] = 0;
+			data[shift] = value;
 		    }
 		}
 		else{
@@ -46,18 +46,18 @@ public class Sorts{
 
     public static void bubbleSort(int[] data){
 	int numSwaps = data.length;
-	int last = data.length;
+	int last = data.length - 1;
 	while (numSwaps != 0){
+	    numSwaps = 0;
 	    for (int i = 0; i < last; i ++){
-		numSwaps = 0;
 		if (data[i] > data[i + 1]){
 		    int placeholder = data[i];
 		    data[i] = data[i + 1];
 		    data[i + 1] = placeholder;
 		    numSwaps ++;
 		}
-		last --;
 	    }
+	    last --;
 	}
     }
 
